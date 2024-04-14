@@ -1,0 +1,39 @@
+- platform: rest
+  name: "Abluft Data"
+  scan_interval: 15
+  resource: http://10.1.1.252:5533
+  method: GET
+  value_template: '{{ value_json.data.Time}}'
+  device_class: "date"
+
+- platform: rest
+  name: "Abluft.LastState"
+  scan_interval: 15
+  resource: http://10.1.1.252:5533
+  method: GET
+  value_template: '{{ value_json.data.lastState }}'
+
+- platform: rest
+  name: "Abluft.State"
+  scan_interval: 15
+  resource: http://10.1.1.252:5533
+  method: GET
+  value_template: '{{ value_json.data.isRunning  }}'
+
+- platform: rest
+  name: "Abluft.DutyCycle"
+  scan_interval: 15
+  resource: http://10.1.1.252:5533
+  method: GET
+  value_template: '{{ value_json.data.DutyCycle }}'
+  unit_of_measurement: "%"
+
+- platform: rest
+  name: "Abluft.Hz"
+  scan_interval: 15
+  resource: http://10.1.1.252:5533
+  method: GET
+  value_template: '{{ value_json.data.Hz }}'
+  device_class: "frequency"
+
+

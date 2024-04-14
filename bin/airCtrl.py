@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-from hashlib import new
 import time
 from datetime import datetime
 
@@ -20,14 +19,14 @@ class PWMCtrl:
 
         self.HasChanged:bool = False
         self.dutyChangeVal:int = 0
-        
+
         # pwmCtrl WILL HOLD THE PWM OBJECT FROM GPIO CLASS
-        self.pwmCtrl  = ''
+        self.pwmCtrl  = None
         self.StartTime = datetime.now()
 
-        self.Pwm_Min:int = 0
+        self.Pwm_Min:int = 5
         self.Pwm_Max:int = 100
-        
+
         pass
 
     def setupPWM(self):
@@ -37,19 +36,21 @@ class PWMCtrl:
         self.lastState = 'Setup'
 
     def StartPwm(self):
-        self.setupPWM()
-        print('Abluft-Start mit ' + str(self.dutyCycle) + ' %')
-        self.pwmCtrl.start(int(self.dutyCycle))
-        self.isRunning = True
-        self.lastState = 'Started'
+        if not self.isRunning:
+            self.setupPWM()
+            print('Abluft-Start mit ' + str(self.dutyCycle) + ' %')
+            self.pwmCtrl.start(int(self.dutyCycle))
+            self.isRunning = True
+            self.lastState = 'Started'
 
     def StopPwm(self):
-        print("Abluft wird Runtergefahren")
-        self.pwmCtrl.stop()
-        GPIO.cleanup()
-        print("\nPWM gestoppt, GPIO Cleanup durchgeführt.")
-        self.lastState = 'Stoped'
-        self.isRunning = False
+        if self.isRunning:
+            print("Abluft wird Runtergefahren")
+            self.pwmCtrl.stop()
+            GPIO.cleanup(self.Pin)
+            print("\nPWM gestoppt, GPIO Cleanup durchgeführt.")
+            self.lastState = 'Stoped'
+            self.isRunning = False
 
     def hasChanged(self):
         if(self.dutyCycle != self.dutyChangeVal):
@@ -59,14 +60,17 @@ class PWMCtrl:
             pass
 
     def ChangePwmDuty(self,newDuty:int):
-        if newDuty>99:
-            newDuty=99
-        if newDuty<0:
-            newDuty=0
-        if newDuty<3:
-            # TEST MIN VALUE THAT WORKS FINE
-            newDuty=4
-        self.lastState = 'Duty-Change'
-        self.dutyCycle = newDuty
-        self.pwmCtrl.ChangeDutyCycle(int(newDuty))
-        
+        if self.isRunning:
+            # Stelle sicher, dass newDuty nicht unter 5 fällt
+            if newDuty < 5:
+                newDuty = 5
+            # Stelle sicher, dass newDuty nicht über 95 steigt
+            elif newDuty > 95:
+                newDuty = 95
+
+            self.lastState = 'Duty-Change'
+            self.dutyCycle = newDuty
+            self.pwmCtrl.ChangeDutyCycle(newDuty)
+
+    def ChangePwmHz(self):
+        pass
