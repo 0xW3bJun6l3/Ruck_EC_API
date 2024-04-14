@@ -11,7 +11,7 @@ Connection:
 
 Setup:
 - Clone this Repo
-- Test it with python3 API.py
+- Test it with python3 api.py
 - If all is working, modify the Service file to your needs and enable it. 
 - Add the Sensor Files to Home Assitant 
 - Enjoy your PWM FAN for you GROW!!
