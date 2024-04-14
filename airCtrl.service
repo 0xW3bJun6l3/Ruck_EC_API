@@ -3,7 +3,7 @@ Description=Ruck EC PWM Controll Service
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/python3 /home/pi/SmartHome/YOURDIR/API.py
+ExecStart=/usr/bin/python3 /home/pi/SmartHome/YOURDIR/api.py
 WorkingDirectory=/home/pi/SmartHome/YOURDIRl
 StandardOutput=syslog
 StandardError=syslog
