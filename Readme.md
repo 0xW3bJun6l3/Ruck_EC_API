@@ -5,8 +5,8 @@ Requierments :
 
 
 Connection: 
-- Add Cabel with Number 1 from FAN to some ground PIN on your PI
-- Add the Cabel with Number 2 to your PWM pin 19 on your PI
+- Add Cabel with Number 1 from FAN to some ground PIN(PIN-14 on your PI
+- Add the Cabel with Number 2 to your PWM GPIO-18(PIN12) on your PI
 
 
 Setup:
