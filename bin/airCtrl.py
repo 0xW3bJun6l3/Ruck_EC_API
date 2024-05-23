@@ -67,7 +67,9 @@ class PWMCtrl:
             # Stelle sicher, dass newDuty nicht über 95 steigt
             elif newDuty > 95:
                 newDuty = 95
-
+            if newDuty == self.dutyCycle:
+                print("Can not change to the same DutyCycle")
+                return
             self.lastState = 'Duty-Change'
             self.dutyCycle = newDuty
             self.pwmCtrl.ChangeDutyCycle(newDuty)
