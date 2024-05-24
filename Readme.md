@@ -1,17 +1,20 @@
+### Required Hardware
+- **RUCK EC 125L 02** or any other volume type with PWM support
+- **Raspberry Pi**
 
-Requierments : 
-- RUCK EC 125L 02 or some other Volume Type but still with PWM!!!
-- Raspberry PI 
+### Connection
+1. Connect the cable from pin 1 of the fan to a ground pin (PIN 14) on your Raspberry Pi.
+2. Connect the cable from pin 2 of the fan to the PWM GPIO pin 18 (PIN 12) on your Raspberry Pi.
 
-
-Connection: 
-- Add Cabel with Number 1 from FAN to some ground PIN(PIN-14 on your PI
-- Add the Cabel with Number 2 to your PWM GPIO-18(PIN12) on your PI
-
-
-Setup:
-- Clone this Repo
-- Test it with python3 API.py
-- If all is working, modify the Service file to your needs and enable it. 
-- Add the Sensor Files to Home Assitant 
-- Enjoy your PWM FAN for you GROW!!
+### Setup
+1. Clone this repository:
+    ```bash
+    git clone https://github.com/0xW3bJun6l3/OpenGrowBox.git
+    ```
+2. Test the setup with:
+    ```bash
+    python3 API.py
+    ```
+3. If everything works, modify the service file to your needs and enable it.
+4. Add the sensor files to Home Assistant.
+5. Enjoy your PWM fan for your grow!
